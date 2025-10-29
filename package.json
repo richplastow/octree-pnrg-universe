@@ -1,0 +1,34 @@
+{
+  "name": "octree-pnrg-universe",
+  "version": "0.0.1",
+  "description": "A procedural, deterministic universe, which works at a huge range of scales",
+  "keywords": [
+    "octree",
+    "pnrg",
+    "procedural",
+    "deterministic",
+    "universe",
+    "3d",
+    "space",
+    "simulation"
+  ],
+  "homepage": "https://richplastow.com/octree-pnrg-universe/",
+  "bugs": {
+    "url": "https://github.com/richplastow/octree-pnrg-universe/issues"
+  },
+  "license": "MIT",
+  "author": "Rich Plastow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richplastow/octree-pnrg-universe.git"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit && echo '\\xE2\\x9C\\x85 No type-errors found!'",
+    "test": "node test.js && echo '\\xE2\\x9C\\x85 All tests passed!'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^24.8.1"
+  },
+  "type": "module"
+}
