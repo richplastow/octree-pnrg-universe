@@ -1,7 +1,7 @@
 /**
  * @typedef {{
- *    name: string,
- *    color: string,
- *    hidden: boolean,
- * }} Node
+ *    children: [Octant,Octant,Octant,Octant,Octant,Octant,Octant,Octant],
+ *    octantId: number,
+ *    parent: Octant,
+ * }} Octant
  */

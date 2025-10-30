@@ -20,7 +20,7 @@ generating 3D worlds. It includes:
 - **A 'procedural plugin' system:**
   for defining how content is generated at different levels of detail and locations
 - **Persistent storage support:**
-  for setting and retrieving custom data at specific octree nodes
+  for setting and retrieving custom data at specific octree nodes ('octants')
 - **WGSL shader examples:**
   which demonstrate how to render the generated worlds in the browser, using WebGPU
 - **Multi-octree variants:**

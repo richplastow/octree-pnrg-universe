@@ -1,4 +1,4 @@
-import './src/get-child-node-ids.test.js';
-import './src/get-node-level.test.js';
-import './src/get-parent-node-id.test.js';
-import './src/validators.test.js';
+import './src/octree/get-child-octant-ids.test.js';
+import './src/octree/get-octant-level.test.js';
+import './src/octree/get-parent-octant-id.test.js';
+import './src/octree/octree-validators.test.js';

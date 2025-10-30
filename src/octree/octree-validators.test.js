@@ -1,5 +1,5 @@
 import { throws, deepStrictEqual as eq } from 'node:assert/strict';
-import { validateU32, validateU29, validateU123, validateU126 } from './validators.js';
+import { validateU32, validateU29, validateU123, validateU126 } from './octree-validators.js';
 
 
 // validateU32() invalid.
@@ -90,4 +90,4 @@ eq(validateU126(0n, 'min():'), void 0);
 eq(validateU126(123456789012345678901234567890n), void 0);
 eq(validateU126(2n ** 126n - 1n, 'max'), void 0);
 
-console.log(`All validators.js tests passed.`);
+console.log(`All octree-validators.js tests passed.`);
