@@ -1,23 +1,23 @@
 import { validateU126 } from './octree-validators.js';
 
-/** #### Returns the depth of an octant
- * - The special case of octant zero returns 1, though it has two depths - 0 and 1.
- * @param {BigInt} octantId_u126 The octant ID (must be an integer, 0 to 2^126-1)
+/** #### Returns the depth of an octant in its octree
+ * - The special case of octant zero returns 0, though it has two depths - 0 and 1
+ * @param {BigInt} octantId The octant ID (must be an integer, 0 to 2^126-1)
  * @returns {number} The depth of the octant (1 to 42)
  */
-export const getOctantDepth = (octantId_u126) => {
-    validateU126(octantId_u126, 'getOctantDepth(): octantId_u126');
+export const getOctantDepth = (octantId) => {
+    validateU126(octantId, 'getOctantDepth(): octantId');
 
     // Special case for zero.
-    if (octantId_u126 === 0n) return 1;
+    if (octantId === 0n) return 0;
 
-    // Efficiently find the highest set bit position, which determines the level.
+    // Efficiently find the highest set bit position, which determines the depth.
     // We step through the bits in chunks of 3 bits (since it's an octree).
-    let level = 0;
-    let id = octantId_u126;
+    let depth = 0;
+    let id = octantId;
     while (id > 0n) {
-        level++;
+        depth++;
         id >>= 3n;
     }
-    return level;
+    return depth;
 }

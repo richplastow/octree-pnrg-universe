@@ -24,7 +24,7 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit && echo '\\xE2\\x9C\\x85 No type-errors found!'",
-    "test": "node test.js && echo '\\xE2\\x9C\\x85 All tests passed!'"
+    "test": "node --test test.js && echo '\\xE2\\x9C\\x85 All tests passed!'"
   },
   "dependencies": {},
   "devDependencies": {

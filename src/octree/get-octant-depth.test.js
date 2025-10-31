@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { throws, deepStrictEqual as eq } from 'node:assert/strict';
 import { getOctantDepth } from './get-octant-depth.js';
 
@@ -8,15 +7,17 @@ const xpx = 'getOctantDepth()';
 
 // @ts-expect-error
 throws(() => getOctantDepth(),
-    { message: /^getOctantDepth\(\): octantId_u126 type is 'undefined' not 'bigint'$/});
+    { message: /^getOctantDepth\(\): octantId type is 'undefined' not 'bigint'$/});
 throws(() => getOctantDepth(2n ** 126n),
-    { message: /^getOctantDepth\(\): octantId_u126 85070591730234615865843651857942052864 is greater than 2\^126-1$/});
+    { message: /^getOctantDepth\(\): octantId 85070591730234615865843651857942052864 is greater than 2\^126-1$/});
 
 
 // getOctantDepth() valid.
 
+// Can get special case level 0.
+eq(getOctantDepth(0n), 0);
+
 // Can get level 1.
-eq(getOctantDepth(0n), 1); // note special case zero
 eq(getOctantDepth(1n), 1);
 eq(getOctantDepth(5n), 1);
 eq(getOctantDepth(7n), 1);

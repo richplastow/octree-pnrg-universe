@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { throws, deepStrictEqual as eq } from 'node:assert/strict';
 import { getOctantChildIds } from './get-octant-child-ids.js';
 
@@ -8,17 +7,13 @@ const xpx = 'getOctantChildIds()';
 
 // @ts-expect-error
 throws(() => getOctantChildIds(),
-    { message: /^getOctantChildIds\(\): octantId_u123 type is 'undefined' not 'bigint'$/});
-throws(() => getOctantChildIds(2n ** 123n), // the first leaf node
-    { message: /^getOctantChildIds\(\): octantId_u123 10633823966279326983230456482242756608 is greater than 2\^123-1$/});
-throws(() => getOctantChildIds(2n ** 126n - 1n), // the last leaf node
-    { message: /^getOctantChildIds\(\): octantId_u123 85070591730234615865843651857942052863 is greater than 2\^123-1$/});
+    { message: /^getOctantChildIds\(\): octantId type is 'undefined' not 'bigint'$/});
 throws(() => getOctantChildIds(2n ** 126n), // the next number after the last leaf node
-    { message: /^getOctantChildIds\(\): octantId_u123 85070591730234615865843651857942052864 is greater than 2\^123-1$/});
-throws(() => getOctantChildIds(2n ** 126n - 2n), // the second-highest uint that 128 bits can represent
-    { message: /^getOctantChildIds\(\): octantId_u123 85070591730234615865843651857942052862 is greater than 2\^123-1$/});
+    { message: /^getOctantChildIds\(\): octantId 85070591730234615865843651857942052864 is greater than 2\^126-1$/});
+throws(() => getOctantChildIds(2n ** 128n - 2n), // the second-highest uint that 128 bits can represent
+    { message: /^getOctantChildIds\(\): octantId 340282366920938463463374607431768211454 is greater than 2\^126-1$/});
 throws(() => getOctantChildIds(2n ** 128n - 1n), // the highest uint that 128 bits can represent
-    { message: /^getOctantChildIds\(\): octantId_u123 340282366920938463463374607431768211455 is greater than 2\^123-1$/});
+    { message: /^getOctantChildIds\(\): octantId 340282366920938463463374607431768211455 is greater than 2\^126-1$/});
 
 
 // getOctantChildIds() valid.
@@ -77,6 +72,12 @@ eq(getOctantChildIds(2n ** 123n - 1n), [
     85070591730234615865843651857942052861n,
     85070591730234615865843651857942052862n,
     85070591730234615865843651857942052863n,
+]);
+eq(getOctantChildIds(2n ** 123n), [ // the first leaf node
+    0n, 0n, 0n, 0n, 0n, 0n, 0n, 0n,
+]);
+eq(getOctantChildIds(2n ** 126n - 1n), [ // the last leaf node
+    0n, 0n, 0n, 0n, 0n, 0n, 0n, 0n,
 ]);
 
 console.log(`All ${xpx} tests passed!`);

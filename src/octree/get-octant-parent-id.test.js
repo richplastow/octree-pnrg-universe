@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { throws, deepStrictEqual as eq } from 'node:assert/strict';
 import { getOctantParentId } from './get-octant-parent-id.js';
 
@@ -8,15 +7,17 @@ const xpx = 'getOctantParentId()';
 
 // @ts-expect-error
 throws(() => getOctantParentId(),
-    { message: /^getOctantParentId\(\): octantId_u126 type is 'undefined' not 'bigint'$/});
+    { message: /^getOctantParentId\(\): octantId type is 'undefined' not 'bigint'$/});
 throws(() => getOctantParentId(2n ** 126n),
-    { message: /^getOctantParentId\(\): octantId_u126 85070591730234615865843651857942052864 is greater than 2\^126-1$/});
+    { message: /^getOctantParentId\(\): octantId 85070591730234615865843651857942052864 is greater than 2\^126-1$/});
 
 
 // getOctantParentId() valid.
 
+// Special case: can get the parent of zero, which is itself.
+eq(getOctantParentId(0n), 0n);
+
 // Can get child octants on levels 1 and 2.
-eq(getOctantParentId(0n), 0n); // note special case zero
 eq(getOctantParentId(1n), 0n);
 eq(getOctantParentId(8n - 1n), 0n);
 eq(getOctantParentId(8n), 1n);
@@ -24,6 +25,7 @@ eq(getOctantParentId(8n + 7n), 1n);
 eq(getOctantParentId(8n + 8n), 2n);
 eq(getOctantParentId(40n), 5n);
 eq(getOctantParentId(56n), 7n);
+eq(getOctantParentId(63n), 7n);
 
 // Can get child octants on level 3.
 eq(getOctantParentId(64n), 8n);
