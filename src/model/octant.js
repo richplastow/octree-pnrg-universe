@@ -1,13 +1,18 @@
+import { getAttributes } from '../rule/get-attributes.js';
 import { getOctantChildIds } from '../octree/get-octant-child-ids.js';
 import { getOctantDepth } from '../octree/get-octant-depth.js';
 import { getOctantParentId } from '../octree/get-octant-parent-id.js';
 
 /**
- * @typedef {import('./point.js').Point} Point
+ * @typedef {import('../type/attributes.js').Attributes} Attributes
+ * @typedef {import('./rule.js').Rule} Rule
  */
 
 /** #### An octant in an octree */
 export class Octant {
+    /** #### The octant's attributes, based on its ID and an array of rules
+     * @type {Attributes} */
+    attributes = {};
 
     /** #### The octant's eight children
      * - All zeroes for a leaf node octant, which has no children
@@ -43,12 +48,14 @@ export class Octant {
     // };
 
     /**
-     * @param {BigInt} octantId
+     * @param {BigInt} octantId The octant's unique identifier within its octree
+     * @param {Rule[]} [rules=[]] Optional array of rules to assign to this octant
      */
-    constructor(octantId) {
+    constructor(octantId, rules = []) {
         this.children = getOctantChildIds(octantId);
         this.depth = getOctantDepth(octantId);
         this.octantId = octantId;
         this.parentId = getOctantParentId(octantId);
+        this.attributes = getAttributes(octantId, rules);
     }
 }

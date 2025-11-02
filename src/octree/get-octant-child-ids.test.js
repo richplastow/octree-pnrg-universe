@@ -80,4 +80,4 @@ eq(getOctantChildIds(2n ** 126n - 1n), [ // the last leaf node
     0n, 0n, 0n, 0n, 0n, 0n, 0n, 0n,
 ]);
 
-console.log(`All ${xpx} tests passed!`);
+console.log(`All ${xpx} tests passed.`);

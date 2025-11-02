@@ -4,7 +4,7 @@
 
 - Version: 0.0.1
 - Created: 29th October 2025 by Rich Plastow
-- Updated: 31st October 2025 by Rich Plastow
+- Updated: 2nd November 2025 by Rich Plastow
 - GitHub: <https://github.com/richplastow/octree-pnrg-universe>
 - Live demo: <https://richplastow.com/octree-pnrg-universe/>
 

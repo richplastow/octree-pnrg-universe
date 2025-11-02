@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "description": "A procedural, deterministic universe, which works at a huge range of scales",
   "keywords": [
+    "3d",
+    "deterministic",
+    "octant",
     "octree",
     "pnrg",
     "procedural",
-    "deterministic",
-    "universe",
-    "3d",
+    "simulation",
     "space",
-    "simulation"
+    "universe"
   ],
   "homepage": "https://richplastow.com/octree-pnrg-universe/",
   "bugs": {

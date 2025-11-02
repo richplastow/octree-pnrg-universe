@@ -69,4 +69,4 @@ throws(() => new Octant(2n ** 126n), {
     eq(octant.parentId, 2n ** 123n - 1n);
 }
 
-console.log(`All Octant tests passed!`);
+console.log(`All Octant tests passed.`);

@@ -51,4 +51,4 @@ eq(getOctantParentId(85070591730234615865843651857942052848n), 10633823966279326
 eq(getOctantParentId(85070591730234615865843651857942052856n), 2n ** 123n - 1n);
 eq(getOctantParentId(85070591730234615865843651857942052856n + 7n), 2n ** 123n - 1n);
 
-console.log(`All ${xpx} tests passed!`);
+console.log(`All ${xpx} tests passed.`);

@@ -45,4 +45,4 @@ eq(getOctantDepth(12345678901234567890n), 22);
 eq(getOctantDepth(10633823966279326983230456482242756606n), 41);
 eq(getOctantDepth(2n ** 123n - 1n), 41);
 
-console.log(`All ${xpx} tests passed!`);
+console.log(`All ${xpx} tests passed.`);
