@@ -2,6 +2,7 @@ import { Rule } from '../model/rule.js';
 
 /**
  * @typedef {import('../type/generator-mode.js').GeneratorMode} GeneratorMode
+ * @typedef {import('../type/rule-values.js').RuleValues} RuleValues
  */
 
 /** #### Checks that a number is an integer between 0 and 41 inclusive
@@ -61,8 +62,17 @@ export const validateKey = (str, xpx = 'str') => {
         `${xpx} contains consecutive underscores`);
 };
 
+/** #### Set of valid value types */
+const vvt = [
+    'boolean',
+    'number',
+    'string',
+    'undefined',
+];
+export const validValueTypes = new Set(vvt);
+
 /** #### Checks that an array of possible values is valid
- * @param {boolean[] | number[] | string[]} arr The array to check
+ * @param {RuleValues} arr The array to check
  * @param {string} [xpx='arr'] Exception prefix, e.g. 'fn(): values'
  */
 export const validateValuesArray = (arr, xpx = 'arr') => {
@@ -70,15 +80,14 @@ export const validateValuesArray = (arr, xpx = 'arr') => {
         `${xpx} type is '${typeof arr}' not 'array'`);
     if (arr.length === 0) throw RangeError(
         `${xpx} is an empty array`);
-    let firstType;
+    let firstType; // the first non-undefined type will set the type for the rest
     for (let i = 0; i < arr.length; i++) {
         const val = arr[i];
         const t = typeof val;
-        if (t !== 'boolean' && t !== 'number' && t !== 'string') {
-            throw TypeError(
-                `${xpx}[${i}] is type '${t}' not 'boolean'|'number'|'string'`);
-        }
-        if (i === 0) {
+        if (!validValueTypes.has(t)) throw TypeError(
+            `${xpx}[${i}] is type '${t}' not '${Array.from(vvt).join("'|'")}'`);
+        if (t === 'undefined') continue;
+        if (!firstType) {
             firstType = t;
         } else if (t !== firstType) {
             throw TypeError(
@@ -92,7 +101,7 @@ export const validateValuesArray = (arr, xpx = 'arr') => {
  * @param {number} depthMin Minimum octant depth (inclusive) to apply this rule
  * @param {GeneratorMode} generatorMode The technique to use when generating attributes
  * @param {string} key The property name to set on the octant's `attributes` object
- * @param {boolean[] | number[] | string[]} values The possible values to assign when the rule applies
+ * @param {RuleValues} values The possible values to assign when the rule applies
  */
 export const validateRuleArguments = (depthMax, depthMin, generatorMode, key, values) => {
     const xpx = 'validateRuleArguments():';

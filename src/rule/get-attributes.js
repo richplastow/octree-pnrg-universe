@@ -31,7 +31,7 @@ export const getAttributes = (octantId, rules) => {
                 default:
             }
             const value = values[Number(index)];
-            attributes[key] = value;
+            if (typeof value !== 'undefined') attributes[key] = value;
         }
     }
     return attributes;

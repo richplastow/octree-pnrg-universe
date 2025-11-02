@@ -28,12 +28,15 @@ throws(() => getAttributes(123n, [1, 2, 3]),
 // getAttributes() valid.
 
 const mode = 'direct-from-id';
+/** @type {undefined} */
+const u = void 0; // undefined
 const spaceRules = [
-    new Rule(7, 1, mode, 'galaxy', ['', '', 'spiral', 'elliptical']),
-    new Rule(10, 4, mode, 'star', ['', '', 'red dwarf', 'yellow', 'blue giant']),
+    new Rule(7, 1, mode, 'galaxy', [u, u, 'spiral', 'elliptical']),
+    new Rule(10, 4, mode, 'star', [u, u, 'red dwarf', 'yellow', 'blue giant']),
 ]
 
 eq(getAttributes(0n, spaceRules), {});
+eq(getAttributes(1n, spaceRules), {}); // not `{ galaxy: undefined }`
 eq(
     getAttributes(2n, spaceRules),
     { galaxy: 'spiral' }

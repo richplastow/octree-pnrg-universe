@@ -90,7 +90,7 @@ throws(() => validateValuesArray('notAnArray', 'fn(): values'),
 throws(() => validateValuesArray([], 'emptyArray'),
     { message: /^emptyArray is an empty array$/});
 throws(() => validateValuesArray([true, false, null], 'invalidTypeArray'),
-    { message: /^invalidTypeArray\[2\] is type 'object' not 'boolean'\|'number'\|'string'$/});
+    { message: /^invalidTypeArray\[2\] is type 'object' not 'boolean'\|'number'\|'string'\|'undefined'$/});
 // @ts-expect-error
 throws(() => validateValuesArray([1, 'two', 3], 'mixedArray'),
     { message: /^mixedArray\[1\] is type 'string' not 'number'$/});
@@ -98,10 +98,15 @@ throws(() => validateValuesArray([1, 'two', 3], 'mixedArray'),
 
 // validateValuesArray() valid.
 
-eq(validateValuesArray([true, false, true], 'boolArray'), void 0);
+/** @type {undefined} */
+const u = void 0; // undefined
+
+eq(validateValuesArray([true, false, u, true], 'boolArray'), void 0);
 eq(validateValuesArray([-1, Infinity, 3, 4, 5.678], 'numArray'), void 0); // TODO maybe U128 instead of number?
-eq(validateValuesArray(['café', '', 'emoji 😊'], 'strArray'), void 0); // TODO maybe some ASCII subset?
+eq(validateValuesArray([u, 'café', '', 'emoji 😊', u], 'strArray'), void 0); // TODO maybe some ASCII subset?
 eq(validateValuesArray([42], 'singleNumArray'), void 0);
+eq(validateValuesArray([u, u], 'justTwoUndefined'), void 0); // TODO maybe disallow this?
+
 
 // validateRuleArguments() invalid.
 
@@ -164,8 +169,8 @@ throws(() => validateRulesArray([new Date()], 'invalidRules'),
 // validateRulesArray() valid.
 
 eq(validateRulesArray([
-    new Rule(7, 1, mode, 'galaxy', ['', '', 'spiral', 'elliptical']),
-    new Rule(10, 4, mode, 'star', ['', '', 'red dwarf', 'yellow', 'blue giant']),
+    new Rule(7, 1, mode, 'galaxy', [u, u, 'spiral', 'elliptical']),
+    new Rule(10, 4, mode, 'star', [u, u, 'red dwarf', 'yellow', 'blue giant']),
 ], 'validRules'), void 0);
 
 console.log(`All rule-validators.js tests passed.`);

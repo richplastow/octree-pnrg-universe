@@ -2,6 +2,7 @@ import { validateRuleArguments } from "../rule/rule-validators.js";
 
 /**
  * @typedef {import('../type/generator-mode.js').GeneratorMode} GeneratorMode
+ * @typedef {import('../type/rule-values.js').RuleValues} RuleValues
  */
 
 /** #### Defines a single rule for procedural content generation */
@@ -23,7 +24,7 @@ export class Rule {
     key = '';
 
     /** #### The possible values to assign when the rule applies
-     * @type {boolean[] | number[] | string[]} */
+     * @type {RuleValues} */
     values = [];
 
     /**
@@ -31,7 +32,7 @@ export class Rule {
      * @param {number} depthMin Minimum octant depth (inclusive) to apply this rule
      * @param {GeneratorMode} generatorMode The technique to use when generating attributes
      * @param {string} key The property name to set on the octant's `attributes` object
-     * @param {boolean[] | number[] | string[]} values The possible values to assign when the rule applies
+     * @param {RuleValues} values The possible values to assign when the rule applies
      */
     constructor(depthMax, depthMin, generatorMode, key, values) {
 
